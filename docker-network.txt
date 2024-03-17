@@ -1,0 +1,15 @@
+network driver :
+1. bridge, container yg terkoneksi dg bridge bisa saling komunikasi
+2. host, mirip host dan hanya bisa di linux
+3. none, tidak bisa komunikasi antar container
+
+docker network ls
+
+docker network create --driver namadriver namanetwork
+docker network create --driver bridge contohnetwork
+
+docker network rm namanetwork
+docker network rm contohnetwork
+
+NB : network tidak bisa dihapus jika sudah digunakan container
+

@@ -1,0 +1,14 @@
+(delete container stop)
+docker container prune
+
+(delete image stop)
+docker image prune
+
+(delete network stop)
+docker network prune
+
+(delete volume stop)
+docker volume prune
+
+(delete container, network & image stop)
+docker system prune

@@ -1,0 +1,13 @@
+image: 
+docker image inspect namaimage:tag
+docker image inspect redis:latest
+
+container:
+docker image inspect namacontainer
+
+volume :
+docker image inspect namavolume
+
+network :
+docker image inspect namanetwork
+

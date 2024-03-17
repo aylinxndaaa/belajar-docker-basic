@@ -1,0 +1,45 @@
+tahapan :
+1. matikan container yang ingin di backup
+2. buat container dengan bersamaan perintah archive
+
+manual :
+docker container stop mongovolume
+
+(buat folder backup)
+mkdir backup
+
+(copy path)
+pwd
+
+docker container create --name nginxbackup --mount "type=bind,source=path,destination=/backup" --mount "type=volume,source=mongodata,destination=/data" nginx:latest
+
+(masuk ke container)
+docker container start nginxbackup
+
+(masuk ke container)
+docker container exec -i -t nginxbackup /bin/bash
+
+(melihat data dalam container)
+ls -l 
+
+(masuk ke folder data utk melihat data yg akan dibackup)
+cd /data
+
+(masuk ke folder backup utk melakukan backup)
+cd /backup
+
+tar cvf /backup/backup.tar.gz /data
+
+docker container stop nginxbackup
+
+docker container -rm nginxbackup
+
+docker container start mongovolume
+
+cara mudah :
+
+docker container stop mongovolume
+
+docker container run --rm --name ubuntubackup --mount "type=bind,source=path,destination=/backup" --mount "type=volume,source=mongodata,destination=/data" ubuntu:latest tar cvf /backup/backup.tar.gz /data
+
+docker container start mongovolume

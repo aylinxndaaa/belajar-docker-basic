@@ -1,0 +1,9 @@
+parameter :
+type 		: mount/bind/volume
+source 		: lokasi file/foder di host
+destination 	: lokasi file/folder di container
+readonly	: hanya bisa read, not write
+
+docker container create --name namacontainer --mount "type=bind,source=folder,destination=folder,readonly"
+
+docker container create --name contohmongo --publish 27018:27017 --mount "type=bind,source=///////,destination=/data/db,readonly" --env MONGO_INITDB_ROOT_USERNAME=dimas --env MONGO_INITDB_ROOT_PASSWORD=dimas mongo:latest

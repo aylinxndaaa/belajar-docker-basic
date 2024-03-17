@@ -1,0 +1,18 @@
+tahapan :
+1. buat volume baru
+2. buat container baru dengan dua mount. volume baru untuk restore backup, dan bind mount folder dari sistem host yang berisi file backup
+3. lakukan restore menggunakan container dengan cara mengextract isi backup ke dalam volume
+4. delete container yg digunakan untuk restore
+5. volume baru yang berisi data backup siap digunakan oleh container baru
+
+(buat volume baru)
+docker volume create mongorestore
+
+docker container run --rm --name ubunturestore --mount "type=bind,source=path,destination=/backup" --mount "type=volume,source=ubunturestore,destination=/data" ubuntu:latest bash -c "cd /data && tar xvf /backup/backup.tar.gz --strip 1
+
+(buat container volume)
+docker container create --name mongoresote --publish 27018:27017 --mount "type=volume,source=mongorestore  ,destination=/data/db,readonly" --env MONGO_INITDB_ROOT_USERNAME=dimas --env MONGO_INITDB_ROOT_PASSWORD=dimas mongo:latest
+
+docker container ls -a
+
+docker container start mongorestore
